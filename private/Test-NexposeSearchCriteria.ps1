@@ -54,7 +54,7 @@ Function Test-NexposeSearchCriteria {
             'ip-address-type'                = ('0','1')                # 0=ipv4, 1=ipv6
             'pci-compliance'                 = ('0','1')                # 0=fail, 1=pass
             'vulnerability-validated-status' = ('present','not-present')
-            'vasset-power-state'             = ('poweredOn','poweredOff','suspended')
+            'vasset-power state'             = ('poweredOn','poweredOff','suspended')
             'vulnerability-exposures'        = ('malwarekit_exploits','exploit_database_exploits','metasploit_exploits',
                                                 'type:"malware_type", name:"malwarekit"','type:"exploit_source_type", name:"107"','type:"exploit_source_type", name:"108"')
         }
@@ -146,10 +146,12 @@ Function Test-NexposeSearchCriteria {
 #        $ReturnValue = New-Object -TypeName 'boolean[]' $($SearchCriteria.filters).Count
 
         $FiltersCount = $($SearchCriteria.filters).Count
-        If ((-not $FiltersCount) -and ($SearchCriteria.filters)) {
+        If(-not $FiltersCount -and $SearchCriteria.filters) {
             $FiltersCount = 1
         }
         $ReturnValue = New-Object -TypeName 'boolean[]' $FiltersCount
+
+
 
         # Check there is a correct "match" value
         If (($SearchCriteria.match -ne 'all') -and ($SearchCriteria.match -ne 'any')) {
